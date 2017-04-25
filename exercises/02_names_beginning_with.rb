@@ -26,7 +26,8 @@ def print_names(students)
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students."
+    filtered_students = students.select! { |student| student[:name].start_with? "H" }
+  puts "Overall, we have #{filtered_students.count} whose names begin with H."
 end
 
 students = input_students
