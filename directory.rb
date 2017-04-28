@@ -1,15 +1,47 @@
+@students = []
+
+def interactive_menu
+  loop do
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+def print_menu
+  puts "1. Input the students."
+  puts "2. Show the students."
+  puts "9. Exit."
+end
+
+def process(selection)
+  case selection
+  when "1"
+    input_students
+  when "2"
+    show_students
+  when "9"
+    Exit
+  else
+    puts "I don't know what you mean! Please try again."
+  end
+end
+
+def show_students
+  print_header
+  print_names
+  print_footer
+end
 
 def input_students
   puts "Please enter the names of the students."
   puts "To finish, just hit return twice!"
-  students = []
   name = gets.chomp
   while !name.empty? do
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students!"
+    @students << {name: name, cohort: :november}
+    puts "Now we have #{@students.count} students!"
     name = gets.chomp
   end
-  students
+  @students
 end
 
 def print_header
@@ -17,17 +49,14 @@ def print_header
   puts "-------------"
 end
 
-def print_names(students)
-  students.each do |student|
+def print_names
+  @students.each do |student|
    puts "#{student[:name]} (#{student[:cohort]} cohort)"
  end
 end
 
-def print_footer(students)
-  puts "Overall, we have #{students.count} great students."
+def print_footer
+  puts "Overall, we have #{@students.count} great students."
 end
 
-students = input_students
-print_header
-print_names(students)
-print_footer(students)
+interactive_menu
